@@ -39,7 +39,9 @@ namespace Budget
                 {
                     if (budget.YearMonth == start.ToString("yyyyMM"))
                     {
-                        totalBudget += budget.DailyAmount() * ((budget.LastDay() - start).Days + 1);
+                        overlappingEnd = budget.LastDay();
+                        overlappingStart = start;
+                        totalBudget += budget.DailyAmount() * ((overlappingEnd - overlappingStart).Days + 1);
                     }
                     else if (budget.YearMonth == end.ToString("yyyyMM"))
                     {
