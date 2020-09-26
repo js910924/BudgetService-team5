@@ -16,7 +16,9 @@ namespace Budget
         public int OverlappingDays(Budget budget)
         {
             var overlappingEnd = End;
-            var overlappingStart = Start;
+            var overlappingStart = Start > budget.FirstDay()
+                ? Start
+                : budget.FirstDay();
             if (Start.ToString("yyyyMM") != End.ToString("yyyyMM"))
             {
                 if (budget.YearMonth == Start.ToString("yyyyMM"))
