@@ -51,7 +51,9 @@ namespace Budget
                     }
                     else if (budget.FirstDay() >= start && budget.FirstDay() <= end)
                     {
-                        totalBudget += budget.DailyAmount() * ((budget.LastDay() - budget.FirstDay()).Days + 1);
+                        overlappingEnd = budget.LastDay();
+                        overlappingStart = budget.FirstDay();
+                        totalBudget += budget.DailyAmount() * ((overlappingEnd - overlappingStart).Days + 1);
                     }
                 }
             }
