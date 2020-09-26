@@ -15,11 +15,7 @@ namespace Budget
 
         public int OverlappingDays(Period another)
         {
-            if (Start > End)
-            {
-                return 0;
-            }
-            if (End < another.Start || Start > another.End)
+            if (IsInvalid() || WithoutOverlapping(another))
             {
                 return 0;
             }
@@ -33,6 +29,16 @@ namespace Budget
                 : another.Start;
 
             return (overlappingEnd - overlappingStart).Days + 1;
+        }
+
+        private bool IsInvalid()
+        {
+            return Start > End;
+        }
+
+        private bool WithoutOverlapping(Period another)
+        {
+            return End < another.Start || Start > another.End;
         }
     }
 }
