@@ -9,10 +9,9 @@ namespace Budget
         public string YearMonth { get; set; }
         public int    Amount    { get; set; }
         
-        public DateTime GetDate()
+        public DateTime FirstDay()
         {
-            var dateTime = DateTime.ParseExact($"{YearMonth}", "yyyyMM", CultureInfo.InvariantCulture);
-            return dateTime;
+            return DateTime.ParseExact($"{YearMonth}", "yyyyMM", CultureInfo.InvariantCulture);
         } 
     }
 }
