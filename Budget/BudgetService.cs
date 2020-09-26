@@ -22,13 +22,10 @@ namespace Budget
             }
 
             var period = new Period(start, end);
-            var totalBudget = 0;
-            foreach (var budget in _repo.GetAll())
-            {
-                totalBudget += budget.GetOverlappingAmount(period);
-            }
 
-            return totalBudget;
+            return _repo
+                   .GetAll()
+                   .Sum(budget => budget.GetOverlappingAmount(period));
         }
     }
 }
