@@ -38,7 +38,8 @@ namespace Budget
                 {
                     if (budget.YearMonth == start.ToString("yyyyMM"))
                     {
-                        var lastOfMonth = new DateTime(start.Year, start.Month, daysInMonth);
+                        var lastOfMonth = new DateTime(budget.FirstDay().Year, budget.FirstDay().Month, daysInMonth);
+                        // var lastOfMonth = new DateTime(start.Year, start.Month, daysInMonth);
                         totalBudget += budget.Amount / daysInMonth * ((lastOfMonth - start).Days + 1);
                     }
                     else if (budget.YearMonth == end.ToString("yyyyMM"))
