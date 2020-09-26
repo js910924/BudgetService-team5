@@ -30,11 +30,10 @@ namespace Budget
             foreach (var budget in budgets)
             {
                 var daysInMonth = DateTime.DaysInMonth(budget.GetDate().Year, budget.GetDate().Month);
-                if (start.Year == end.Year && start.Month == end.Month)
+                var isSameMonth = start.Year == end.Year && start.Month == end.Month;
+                if (isSameMonth)
                 {
-                        totalBudget += budget.Amount /
-                                       daysInMonth *
-                                       ((end - start).Days + 1);
+                        totalBudget += budget.Amount / daysInMonth * ((end - start).Days + 1);
                 }
                 else
                 {
