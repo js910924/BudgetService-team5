@@ -29,6 +29,10 @@ namespace Budget
             var totalBudget = 0;
             foreach (var budget in budgets)
             {
+                if (end < budget.FirstDay()||start>budget.LastDay())
+                {
+                    continue; 
+                }
                 var overlappingEnd = end;
                 var overlappingStart = start;
                 if (start.ToString("yyyyMM") != end.ToString("yyyyMM"))
@@ -43,18 +47,20 @@ namespace Budget
                         overlappingEnd = end;
                         overlappingStart = budget.FirstDay();
                     }
-                    else if (budget.FirstDay() >= start && budget.FirstDay() <= end)
+                    else 
+                    // else if (budget.FirstDay() >= start && budget.FirstDay() <= end)
                     {
                         overlappingEnd = budget.LastDay();
                         overlappingStart = budget.FirstDay();
                     }
-                    else
-                    {
-                        continue;
-                    }
+                    // else
+                    // {
+                    //     continue;
+                    // }
                 }
 
-                totalBudget += budget.DailyAmount() * ((overlappingEnd - overlappingStart).Days + 1);
+                var overlappingDays = ((overlappingEnd - overlappingStart).Days + 1);
+                totalBudget += budget.DailyAmount() * overlappingDays;
             }
 
             return totalBudget;
