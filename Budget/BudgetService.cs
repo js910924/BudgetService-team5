@@ -37,7 +37,7 @@ namespace Budget
                 {
                     if (budget.YearMonth == start.ToString("yyyyMM"))
                     {
-                        var lastOfMonth = LastDay(budget);
+                        var lastOfMonth = budget.LastDay();
                         totalBudget += budget.Amount / budget.Days() * ((lastOfMonth - start).Days + 1);
                     }
                     else if (budget.YearMonth == end.ToString("yyyyMM"))
@@ -52,12 +52,6 @@ namespace Budget
             }
 
             return totalBudget;
-        }
-
-        private static DateTime LastDay(Budget budget)
-        {
-            var lastOfMonth = new DateTime(budget.FirstDay().Year, budget.FirstDay().Month, budget.Days());
-            return lastOfMonth;
         }
     }
 }
