@@ -23,5 +23,10 @@ namespace Budget
         {
             return new DateTime(FirstDay().Year, FirstDay().Month, Days());
         }
+
+        public int DailyAmount()
+        {
+            return Amount / Days();
+        }
     }
 }
