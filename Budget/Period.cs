@@ -24,23 +24,14 @@ namespace Budget
                 if (budget.YearMonth == Start.ToString("yyyyMM"))
                 {
                     overlappingEnd = budget.LastDay();
-                    overlappingStart = Start > budget.FirstDay()
-                        ? Start
-                        : budget.FirstDay();
                 }
                 else if (budget.YearMonth == End.ToString("yyyyMM"))
                 {
                     overlappingEnd = End;
-                    overlappingStart = Start > budget.FirstDay()
-                        ? Start
-                        : budget.FirstDay();
                 }
                 else
                 {
                     overlappingEnd = budget.LastDay();
-                    overlappingStart = Start > budget.FirstDay()
-                        ? Start
-                        : budget.FirstDay();
                 }
             }
 
