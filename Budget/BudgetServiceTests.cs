@@ -22,7 +22,8 @@ namespace Budget
 
         [Test]
         public void WhenEndDateGreaterThanStartDate()
-        {
+        { 
+            _repo.GetAll().Returns(new List<Budget>());
             _startDate = new DateTime(2020, 1, 1);
             _endDate = new DateTime(2019, 1, 1);
             AmountShouldBe(0);
@@ -31,30 +32,28 @@ namespace Budget
         [Test]
         public void WhenNoBudget()
         {
-            GivenListOfBudgets(new List<Budget>());
-            _repo.GetAll().Returns(_budgets);
+            _repo.GetAll().Returns(new List<Budget>());
             _startDate = new DateTime(2019, 08, 1);
             _endDate = new DateTime(2019, 09, 1);
             AmountShouldBe(0);
         }
 
-        private void GivenListOfBudgets(List<Budget> budgets)
+        private List<Budget> GivenListOfBudgets(List<Budget> budgets)
         {
-            _budgets = budgets;
+            return budgets;
         }
 
         [Test]
         public void WhenQueryOneDay()
         {
-            GivenListOfBudgets(new List<Budget>()
-                               {
-                                   new Budget
+            _repo.GetAll().Returns(new List<Budget>()
                                    {
-                                       YearMonth = "202001",
-                                       Amount = 310
-                                   },
-                               });
-            _repo.GetAll().Returns(_budgets);
+                                       new Budget
+                                       {
+                                           YearMonth = "202001",
+                                           Amount = 310
+                                       },
+                                   });
             _startDate = new DateTime(2020, 01, 01);
             _endDate = new DateTime(2020, 01, 01);
 
@@ -64,15 +63,14 @@ namespace Budget
         [Test]
         public void WhenQueryOneEntireMonth()
         {
-            GivenListOfBudgets(new List<Budget>()
-                               {
-                                   new Budget
+            _repo.GetAll().Returns(new List<Budget>()
                                    {
-                                       YearMonth = "202001",
-                                       Amount = 310
-                                   },
-                               });
-            _repo.GetAll().Returns(_budgets);
+                                       new Budget
+                                       {
+                                           YearMonth = "202001",
+                                           Amount = 310
+                                       },
+                                   });
             _startDate = new DateTime(2020, 01, 01);
             _endDate = new DateTime(2020, 01, 31);
 
@@ -82,20 +80,19 @@ namespace Budget
         [Test]
         public void WhenQueryCrossEntireTwoMonth()
         {
-            GivenListOfBudgets(new List<Budget>()
-                               {
-                                   new Budget
+            _repo.GetAll().Returns(new List<Budget>()
                                    {
-                                       YearMonth = "202001",
-                                       Amount = 310
-                                   },
-                                   new Budget
-                                   {
-                                       YearMonth = "202002",
-                                       Amount = 290
-                                   }
-                               });
-            _repo.GetAll().Returns(_budgets);
+                                       new Budget
+                                       {
+                                           YearMonth = "202001",
+                                           Amount = 310
+                                       },
+                                       new Budget
+                                       {
+                                           YearMonth = "202002",
+                                           Amount = 290
+                                       }
+                                   });
             _startDate = new DateTime(2020, 01, 01);
             _endDate = new DateTime(2020, 02, 29);
 
@@ -105,20 +102,19 @@ namespace Budget
         [Test]
         public void WhenQueryCrossTwoMonth()
         {
-            GivenListOfBudgets(new List<Budget>()
-                               {
-                                   new Budget
+            _repo.GetAll().Returns(new List<Budget>()
                                    {
-                                       YearMonth = "202001",
-                                       Amount = 310
-                                   },
-                                   new Budget
-                                   {
-                                       YearMonth = "202002",
-                                       Amount = 2900
-                                   }
-                               });
-            _repo.GetAll().Returns(_budgets);
+                                       new Budget
+                                       {
+                                           YearMonth = "202001",
+                                           Amount = 310
+                                       },
+                                       new Budget
+                                       {
+                                           YearMonth = "202002",
+                                           Amount = 2900
+                                       }
+                                   });
             _startDate = new DateTime(2020, 01, 31);
             _endDate = new DateTime(2020, 02, 2);
 
@@ -128,30 +124,29 @@ namespace Budget
         [Test]
         public void WhenQueryCrossThreeMonth()
         {
-            GivenListOfBudgets(new List<Budget>()
-                               {
-                                   new Budget
+            _repo.GetAll().Returns(new List<Budget>()
                                    {
-                                       YearMonth = "202001",
-                                       Amount = 310
-                                   },
-                                   new Budget
-                                   {
-                                       YearMonth = "202002",
-                                       Amount = 2900
-                                   },
-                                   new Budget
-                                   {
-                                       YearMonth = "202003",
-                                       Amount = 31
-                                   },
-                                   new Budget
-                                   {
-                                       YearMonth = "200001",
-                                       Amount = 31
-                                   }
-                               });
-            _repo.GetAll().Returns(_budgets);
+                                       new Budget
+                                       {
+                                           YearMonth = "202001",
+                                           Amount = 310
+                                       },
+                                       new Budget
+                                       {
+                                           YearMonth = "202002",
+                                           Amount = 2900
+                                       },
+                                       new Budget
+                                       {
+                                           YearMonth = "202003",
+                                           Amount = 31
+                                       },
+                                       new Budget
+                                       {
+                                           YearMonth = "200001",
+                                           Amount = 31
+                                       }
+                                   });
             _startDate = new DateTime(2020, 01, 31);
             _endDate = new DateTime(2020, 03, 01);
 
@@ -161,25 +156,24 @@ namespace Budget
         [Test]
         public void WhenQueryCrossThreeMonthByMiddleNoBudget()
         {
-            GivenListOfBudgets(new List<Budget>()
-                               {
-                                   new Budget
+            _repo.GetAll().Returns(new List<Budget>()
                                    {
-                                       YearMonth = "202001",
-                                       Amount = 310
-                                   },
-                                   new Budget
-                                   {
-                                       YearMonth = "202003",
-                                       Amount = 31
-                                   },
-                                   new Budget
-                                   {
-                                       YearMonth = "200001",
-                                       Amount = 31
-                                   }
-                               });
-            _repo.GetAll().Returns(_budgets);
+                                       new Budget
+                                       {
+                                           YearMonth = "202001",
+                                           Amount = 310
+                                       },
+                                       new Budget
+                                       {
+                                           YearMonth = "202003",
+                                           Amount = 31
+                                       },
+                                       new Budget
+                                       {
+                                           YearMonth = "200001",
+                                           Amount = 31
+                                       }
+                                   });
             _startDate = new DateTime(2020, 01, 31);
             _endDate = new DateTime(2020, 03, 01);
 
@@ -189,15 +183,14 @@ namespace Budget
         [Test]
         public void WhenEmptyBudget()
         {
-            GivenListOfBudgets(new List<Budget>()
-                               {
-                                   new Budget()
+            _repo.GetAll().Returns(new List<Budget>()
                                    {
-                                       YearMonth = "208001",
-                                       Amount = 100,
-                                   }
-                               });
-            _repo.GetAll().Returns(_budgets);
+                                       new Budget()
+                                       {
+                                           YearMonth = "208001",
+                                           Amount = 100,
+                                       }
+                                   });
             _startDate = new DateTime(2020, 01, 31);
             _endDate = new DateTime(2020, 03, 01);
 
