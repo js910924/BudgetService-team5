@@ -15,10 +15,15 @@ namespace Budget
 
         public int OverlappingDays(Budget budget)
         {
+            if (End < budget.FirstDay() || Start > budget.LastDay())
+            {
+                return 0;
+            }
+
             var overlappingEnd = End < budget.LastDay()
                 ? End
                 : budget.LastDay();
-            
+
             var overlappingStart = Start > budget.FirstDay()
                 ? Start
                 : budget.FirstDay();
