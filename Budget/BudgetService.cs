@@ -61,17 +61,11 @@ namespace Budget
                     }
                 }
 
-                var overlappingDays = OverlappingDays(overlappingStart, overlappingEnd);
+                var overlappingDays = ((overlappingEnd - overlappingStart).Days + 1);
                 totalBudget += budget.DailyAmount() * overlappingDays;
             }
 
             return totalBudget;
-        }
-
-        private static int OverlappingDays(DateTime start, DateTime end)
-        {
-            var overlappingDays = ((end - start).Days + 1);
-            return overlappingDays;
         }
     }
 }
