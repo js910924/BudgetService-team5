@@ -37,7 +37,6 @@ namespace Budget
                     {
                         overlappingEnd = end;
                         overlappingStart = start;
-                        // totalBudget += budget.DailyAmount() * ((overlappingEnd - overlappingStart).Days + 1);
                     }
                     else
                     {
@@ -50,28 +49,25 @@ namespace Budget
                     {
                         overlappingEnd = budget.LastDay();
                         overlappingStart = start;
-                        // totalBudget += budget.DailyAmount() * ((overlappingEnd - overlappingStart).Days + 1);
                     }
                     else if (budget.YearMonth == end.ToString("yyyyMM"))
                     {
                         overlappingEnd = end;
                         overlappingStart = budget.FirstDay();
-                        // totalBudget += budget.DailyAmount() * ((overlappingEnd - overlappingStart).Days + 1);
                     }
                     else if (budget.FirstDay() >= start && budget.FirstDay() <= end)
                     {
                         overlappingEnd = budget.LastDay();
                         overlappingStart = budget.FirstDay();
-                        // totalBudget += budget.DailyAmount() * ((overlappingEnd - overlappingStart).Days + 1);
                     }
                     else
                     {
                         continue;
-                    }
-                    
+                    } 
                 }
 
-                totalBudget += budget.DailyAmount() * ((overlappingEnd - overlappingStart).Days + 1);
+                var overlappingDays = (overlappingEnd - overlappingStart).Days + 1;
+                totalBudget += budget.DailyAmount() * overlappingDays;
             }
 
             return totalBudget;
