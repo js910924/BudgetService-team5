@@ -28,7 +28,7 @@ namespace Budget
             var totalBudget = 0;
             foreach (var budget in budgets)
             {
-                var dailyAmount = budget.Amount / budget.Days();
+                var dailyAmount = budget.DailyAmount();
                 if (start.ToString("yyyyMM") == end.ToString("yyyyMM"))
                 {
                     if (budget.YearMonth == start.ToString("yyyyMM"))

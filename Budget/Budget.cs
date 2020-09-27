@@ -25,5 +25,11 @@ namespace Budget
             var lastOfMonth = new DateTime(FirstDay().Year, FirstDay().Month, Days());
             return lastOfMonth;
         }
+
+        public int DailyAmount()
+        {
+            var dailyAmount = Amount / Days();
+            return dailyAmount;
+        }
     }
 }
