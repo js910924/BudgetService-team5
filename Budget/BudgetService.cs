@@ -30,10 +30,6 @@ namespace Budget
             var period = new Period(start, end);
             foreach (var budget in budgets)
             {
-                if (end < budget.FirstDay() || start > budget.LastDay())
-                {
-                    continue;
-                }
 
                 totalBudget += budget.DailyAmount() * period.OverlappingDays(budget);
             }
