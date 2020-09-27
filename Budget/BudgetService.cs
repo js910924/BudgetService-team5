@@ -32,46 +32,11 @@ namespace Budget
                 {
                     continue;
                 }
-                var overlappingDays = OverlappingDays(new Period(start, end), budget);
+                var overlappingDays = new Period(start, end).OverlappingDays(budget);
                 totalBudget += budget.DailyAmount() * overlappingDays;
             }
 
             return totalBudget;
-        }
-
-        private static int OverlappingDays(Period period, Budget budget)
-        {
-            DateTime overlappingStart = period.Start;
-            DateTime overlappingEnd = period.End;
-            if (period.Start.ToString("yyyyMM") == period.End.ToString("yyyyMM"))
-            {
-                if (budget.YearMonth == period.Start.ToString("yyyyMM"))
-                {
-                    overlappingEnd = period.End;
-                    overlappingStart = period.Start;
-                }
-            }
-            else
-            {
-                if (budget.YearMonth == period.Start.ToString("yyyyMM"))
-                {
-                    overlappingEnd = budget.LastDay();
-                    overlappingStart = period.Start;
-                }
-                else if (budget.YearMonth == period.End.ToString("yyyyMM"))
-                {
-                    overlappingEnd = period.End;
-                    overlappingStart = budget.FirstDay();
-                }
-                else if (budget.FirstDay() >= period.Start && budget.FirstDay() <= period.End)
-                {
-                    overlappingEnd = budget.LastDay();
-                    overlappingStart = budget.FirstDay();
-                }
-            }
-
-            var overlappingDays = ((overlappingEnd - overlappingStart).Days + 1);
-            return overlappingDays;
         }
     }
 }
