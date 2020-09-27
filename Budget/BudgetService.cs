@@ -13,11 +13,6 @@ namespace Budget
 
         public DateTime Start { get; private set; }
         public DateTime End { get; private set; }
-
-        public int OverlappingDays()
-        {
-            return (End - Start).Days + 1;
-        }
     }
 
     public class BudgetService
@@ -78,11 +73,17 @@ namespace Budget
                     }
                 }
 
-                var overlappingDays = new Period(overlappingStart, overlappingEnd).OverlappingDays();
+                var overlappingDays = OverlappingDays(new Period(overlappingStart, overlappingEnd));
                 totalBudget += budget.DailyAmount() * overlappingDays;
             }
 
             return totalBudget;
+        }
+
+        private static int OverlappingDays(Period period)
+        {
+            var overlappingDays = ((period.End - period.Start).Days + 1);
+            return overlappingDays;
         }
     }
 }
