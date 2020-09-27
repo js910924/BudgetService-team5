@@ -30,15 +30,10 @@ namespace Budget
             var period = new Period(start, end);
             foreach (var budget in budgets)
             { 
-                totalBudget += budget.DailyAmount() * period.OverlappingDays( CreatePeriod(budget));
+                totalBudget += budget.DailyAmount() * period.OverlappingDays( budget.CreatePeriod());
             }
 
             return totalBudget;
-        }
-
-        private static Period CreatePeriod(Budget budget)
-        {
-            return new Period(budget.FirstDay(), budget.LastDay());
         }
     }
 }
