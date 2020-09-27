@@ -3,6 +3,23 @@ using System.Linq;
 
 namespace Budget
 {
+    public class Period
+    {
+        public Period(DateTime start, DateTime end)
+        {
+            Start = start;
+            End = end;
+        }
+
+        public DateTime Start { get; private set; }
+        public DateTime End { get; private set; }
+
+        public int OverlappingDays()
+        {
+            return (End - Start).Days + 1;
+        }
+    }
+
     public class BudgetService
     {
         private readonly IBudgetRepo _repo;
