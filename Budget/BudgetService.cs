@@ -47,7 +47,7 @@ namespace Budget
                     }
                     else if (budget.FirstDay() >= start && budget.FirstDay() <= end)
                     {
-                        totalBudget += budget.Amount;
+                        totalBudget += budget.Amount / budget.Days() * ((budget.LastDay() - budget.FirstDay()).Days + 1);
                     }
                 }
             }
