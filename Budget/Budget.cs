@@ -7,12 +7,11 @@ namespace Budget
     public class Budget
     {
         public string YearMonth { get; set; }
-        public int    Amount    { get; set; }
+        public int Amount { get; set; }
 
         private DateTime FirstDay()
         {
-            var dateTime = DateTime.ParseExact($"{YearMonth}", "yyyyMM", CultureInfo.InvariantCulture);
-            return dateTime;
+            return DateTime.ParseExact($"{YearMonth}", "yyyyMM", CultureInfo.InvariantCulture);
         }
 
         private int Days()
@@ -22,14 +21,12 @@ namespace Budget
 
         private DateTime LastDay()
         {
-            var lastOfMonth = new DateTime(FirstDay().Year, FirstDay().Month, Days());
-            return lastOfMonth;
+            return new DateTime(FirstDay().Year, FirstDay().Month, Days());
         }
 
         private int DailyAmount()
         {
-            var dailyAmount = Amount / Days();
-            return dailyAmount;
+            return Amount / Days();
         }
 
         private Period CreatePeriod()
