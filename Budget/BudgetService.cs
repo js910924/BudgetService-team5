@@ -29,7 +29,7 @@ namespace Budget
             foreach (var budget in budgets)
             {
                 var daysInMonth = DateTime.DaysInMonth(budget.GetDate().Year, budget.GetDate().Month);
-                if (start.Year == end.Year && start.Month == end.Month)
+                if (start.ToString("yyyyMM") == end.ToString("yyyyMM"))
                 {
                     if (budget.YearMonth == start.ToString("yyyyMM"))
                     {
