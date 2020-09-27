@@ -28,7 +28,7 @@ namespace Budget
             var totalBudget = 0;
             foreach (var budget in budgets)
             {
-                var daysInMonth = DateTime.DaysInMonth(budget.GetDate().Year, budget.GetDate().Month);
+                var daysInMonth = DateTime.DaysInMonth(budget.FirstDay().Year, budget.FirstDay().Month);
                 if (start.ToString("yyyyMM") == end.ToString("yyyyMM"))
                 {
                     if (budget.YearMonth == start.ToString("yyyyMM"))
@@ -49,9 +49,9 @@ namespace Budget
                     {
                         totalBudget += budget.Amount /
                                        daysInMonth *
-                                       ((end - budget.GetDate()).Days + 1);
+                                       ((end - budget.FirstDay()).Days + 1);
                     }
-                    else if (budget.GetDate() >= start && budget.GetDate() <= end)
+                    else if (budget.FirstDay() >= start && budget.FirstDay() <= end)
                     {
                         totalBudget += budget.Amount;
                     }
