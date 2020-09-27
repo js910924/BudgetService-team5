@@ -40,9 +40,7 @@ namespace Budget
                 {
                     if (budget.YearMonth == start.ToString("yyyyMM"))
                     {
-                        var lastOfMonth = budget.LastDay();
-                        // var lastOfMonth = new DateTime(start.Year, start.Month, budget.Days())
-                        totalBudget += budget.Amount / budget.Days() * ((lastOfMonth - start).Days + 1);
+                        totalBudget += budget.Amount / budget.Days() * ((budget.LastDay() - start).Days + 1);
                     }
                     else if (budget.YearMonth == end.ToString("yyyyMM"))
                     {
@@ -50,7 +48,8 @@ namespace Budget
                     }
                     else if (budget.FirstDay() >= start && budget.FirstDay() <= end)
                     {
-                        totalBudget += budget.Amount;
+                        totalBudget += budget.Amount / budget.Days() * ((budget.LastDay() - budget.FirstDay()).Days + 1);
+                        // totalBudget += budget.Amount;
                     }
                 }
             }
