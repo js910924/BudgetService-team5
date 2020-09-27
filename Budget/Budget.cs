@@ -8,31 +8,31 @@ namespace Budget
     {
         public string YearMonth { get; set; }
         public int    Amount    { get; set; }
-        
-        public DateTime FirstDay()
+
+        private DateTime FirstDay()
         {
             var dateTime = DateTime.ParseExact($"{YearMonth}", "yyyyMM", CultureInfo.InvariantCulture);
             return dateTime;
         }
 
-        public int Days()
+        private int Days()
         {
             return DateTime.DaysInMonth(FirstDay().Year, FirstDay().Month);
         }
 
-        public DateTime LastDay()
+        private DateTime LastDay()
         {
             var lastOfMonth = new DateTime(FirstDay().Year, FirstDay().Month, Days());
             return lastOfMonth;
         }
 
-        public int DailyAmount()
+        private int DailyAmount()
         {
             var dailyAmount = Amount / Days();
             return dailyAmount;
         }
 
-        public Period CreatePeriod()
+        private Period CreatePeriod()
         {
             return new Period(FirstDay(), LastDay());
         }
