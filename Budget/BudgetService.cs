@@ -26,14 +26,15 @@ namespace Budget
             }
 
             var totalBudget = 0;
+            var period = new Period(start, end);
             foreach (var budget in budgets)
             {
                 if (budget.LastDay() < start || budget.FirstDay()>end)
                 {
                     continue;
                 }
-                var overlappingDays = new Period(start, end).OverlappingDays(budget);
-                totalBudget += budget.DailyAmount() * overlappingDays;
+
+                totalBudget += budget.DailyAmount() * period.OverlappingDays(budget);
             }
 
             return totalBudget;
