@@ -19,5 +19,11 @@ namespace Budget
         {
             return DateTime.DaysInMonth(FirstDay().Year, FirstDay().Month);
         }
+
+        public DateTime LastDay()
+        {
+            var lastOfMonth = new DateTime(FirstDay().Year, FirstDay().Month, Days());
+            return lastOfMonth;
+        }
     }
 }
