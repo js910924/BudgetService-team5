@@ -13,6 +13,11 @@ namespace Budget
         {
             var dateTime = DateTime.ParseExact($"{YearMonth}", "yyyyMM", CultureInfo.InvariantCulture);
             return dateTime;
-        } 
+        }
+
+        public int Days()
+        {
+            return DateTime.DaysInMonth(FirstDay().Year, FirstDay().Month);
+        }
     }
 }

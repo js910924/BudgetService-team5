@@ -28,27 +28,26 @@ namespace Budget
             var totalBudget = 0;
             foreach (var budget in budgets)
             {
-                var daysInMonth = DateTime.DaysInMonth(budget.FirstDay().Year, budget.FirstDay().Month);
                 if (start.ToString("yyyyMM") == end.ToString("yyyyMM"))
                 {
                     if (budget.YearMonth == start.ToString("yyyyMM"))
                     {
-                        totalBudget += budget.Amount / daysInMonth * ((end - start).Days + 1);
+                        totalBudget += budget.Amount / budget.Days() * ((end - start).Days + 1);
                     }
                 }
                 else
                 {
                     if (budget.YearMonth == start.ToString("yyyyMM"))
                     {
-                        var lastOfMonth = new DateTime(start.Year, start.Month, daysInMonth);
+                        var lastOfMonth = new DateTime(start.Year, start.Month, budget.Days());
                         totalBudget += budget.Amount /
-                                       daysInMonth *
+                                       budget.Days() *
                                        ((lastOfMonth - start).Days + 1);
                     }
                     else if (budget.YearMonth == end.ToString("yyyyMM"))
                     {
                         totalBudget += budget.Amount /
-                                       daysInMonth *
+                                       budget.Days() *
                                        ((end - budget.FirstDay()).Days + 1);
                     }
                     else if (budget.FirstDay() >= start && budget.FirstDay() <= end)
