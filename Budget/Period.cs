@@ -15,7 +15,9 @@ namespace Budget
 
         public int OverlappingDays(Budget budget)
         {
-            var overlappingEnd = End;
+            var overlappingEnd = End<budget.LastDay()
+                ?End
+                :budget.LastDay();
             var overlappingStart = Start > budget.FirstDay()
                 ?Start
                 :budget.FirstDay();
@@ -24,22 +26,22 @@ namespace Budget
             {
                 if (budget.YearMonth == Start.ToString("yyyyMM"))
                 {
-                    overlappingEnd = End;
+                    // overlappingEnd = End;
                 }
             }
             else
             {
                 if (budget.YearMonth == Start.ToString("yyyyMM"))
                 {
-                    overlappingEnd = budget.LastDay();
+                    // overlappingEnd = budget.LastDay();
                 }
                 else if (budget.YearMonth == End.ToString("yyyyMM"))
                 {
-                    overlappingEnd = End;
+                    // overlappingEnd = End;
                 }
                 else if (budget.FirstDay() >= Start && budget.FirstDay() <= End)
                 {
-                    overlappingEnd = budget.LastDay();
+                    // overlappingEnd = budget.LastDay();
                 }
             }
 
