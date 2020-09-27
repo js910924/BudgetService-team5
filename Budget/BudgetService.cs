@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using NSubstitute;
 
@@ -20,16 +21,11 @@ namespace Budget
                 return 0;
             }
 
-            var budgets = _repo.GetAll();
-
-            var totalBudget = 0;
             var period = new Period(start, end);
-            foreach (var budget in budgets)
-            { 
-                totalBudget += budget.OverlappingAmount(period);
-            }
 
-            return totalBudget;
+            return _repo
+                   .GetAll()
+                   .Sum(budget => budget.OverlappingAmount(period));
         }
     }
 }
