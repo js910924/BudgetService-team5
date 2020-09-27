@@ -31,5 +31,10 @@ namespace Budget
             var dailyAmount = Amount / Days();
             return dailyAmount;
         }
+
+        public Period CreatePeriod()
+        {
+            return new Period(FirstDay(), LastDay());
+        }
     }
 }
