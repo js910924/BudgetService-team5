@@ -29,11 +29,6 @@ namespace Budget
             var period = new Period(start, end);
             foreach (var budget in budgets)
             {
-                if (budget.LastDay() < start || budget.FirstDay()>end)
-                {
-                    continue;
-                }
-
                 totalBudget += budget.DailyAmount() * period.OverlappingDays(budget);
             }
 
