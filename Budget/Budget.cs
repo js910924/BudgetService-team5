@@ -1,6 +1,9 @@
+#region
 
 using System;
 using System.Globalization;
+
+#endregion
 
 namespace Budget
 {
@@ -8,37 +11,35 @@ namespace Budget
     {
         public string YearMonth { get; set; }
         public int    Amount    { get; set; }
-        
-        public DateTime FirstDay()
+
+        public int OverlappingAmount(Period period)
         {
-            var dateTime = DateTime.ParseExact($"{YearMonth}", "yyyyMM", CultureInfo.InvariantCulture);
-            return dateTime;
+            return DailyAmount() * period.OverlappingDays(CreatePeriod());
         }
 
-        public int Days()
-        {
-            var daysInMonth = DateTime.DaysInMonth(FirstDay().Year, FirstDay().Month);
-            return daysInMonth;
-        }
-
-        public DateTime LastDay()
-        {
-            return new DateTime(FirstDay().Year, FirstDay().Month, Days());
-        }
-
-        public int DailyAmount()
-        {
-            return Amount / Days();
-        }
-
-        public Period CreatePeriod()
+        private Period CreatePeriod()
         {
             return new Period(FirstDay(), LastDay());
         }
 
-        public int OverlappingAmount(Period period)
+        private int DailyAmount()
         {
-            return DailyAmount() * period.OverlappingDays( CreatePeriod());
+            return Amount / Days();
+        }
+
+        private int Days()
+        {
+            return DateTime.DaysInMonth(FirstDay().Year, FirstDay().Month);
+        }
+
+        private DateTime FirstDay()
+        {
+            return DateTime.ParseExact($"{YearMonth}", "yyyyMM", CultureInfo.InvariantCulture);
+        }
+
+        private DateTime LastDay()
+        {
+            return new DateTime(FirstDay().Year, FirstDay().Month, Days());
         }
     }
 }

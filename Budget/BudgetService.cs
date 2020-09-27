@@ -15,8 +15,7 @@ namespace Budget
         }
 
         public double Query(DateTime start, DateTime end)
-        {
-
+        { 
             var period = new Period(start, end);
 
             return _repo
