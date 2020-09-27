@@ -17,19 +17,17 @@ namespace Budget
         {
             var another = new Period(budget.FirstDay(), budget.LastDay());
 
-            var firstDay = another.Start;
-            var lastDay = another.End;
-            if (End < firstDay || Start > lastDay)
+            if (End < another.Start || Start > another.End)
             {
                 return 0;
             }
 
-            var overlappingEnd = End < lastDay
+            var overlappingEnd = End < another.End
                 ? End
-                : lastDay;
-            var overlappingStart = Start > firstDay
+                : another.End;
+            var overlappingStart = Start > another.Start
                 ? Start
-                : firstDay;
+                : another.Start;
 
             return (overlappingEnd - overlappingStart).Days + 1;
         }
