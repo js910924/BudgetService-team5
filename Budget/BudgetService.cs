@@ -21,10 +21,6 @@ namespace Budget
             }
 
             var budgets = _repo.GetAll();
-            if (!budgets.Any())
-            {
-                return 0;
-            }
 
             var totalBudget = 0;
             var period = new Period(start, end);
